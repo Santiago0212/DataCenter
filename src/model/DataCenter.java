@@ -193,6 +193,7 @@ public class DataCenter {
                         miniRooms[i][j].asignCompany(companyName, companyNit, serversAmount, day, month, year, cacheMemory, processorsAmount, processorsTrademark, ramMemory, disksAmount, disksCapacity);
                         rentingCompanies.add(miniRooms[i][j].getHostCompany());
                         miniRooms[i][j].setAvailable(false);
+                        miniRooms[i][j].setOn(true);
                         asigned = true;
                     }
                 }
@@ -327,11 +328,11 @@ public class DataCenter {
                             totalDiskCapacity += miniRooms[i][j].getTotalDiskCapacity();
                             totalRamMemory += miniRooms[i][j].getTotalRamMemory();
                             miniRooms[i][j].leaveMiniRoom();
-                            rentingCompanies.remove(companyNumber);
                         }
                     }
                 }
             }
+            rentingCompanies.remove(companyNumber);
         }
         else{
             for(int i=0; i<8; i++){
@@ -341,11 +342,11 @@ public class DataCenter {
                             totalDiskCapacity += miniRooms[i][j].getTotalDiskCapacity();
                             totalRamMemory += miniRooms[i][j].getTotalRamMemory();
                             miniRooms[i][j].leaveMiniRoom();
-                            rentingCompanies.remove(companyNumber);
                         }
                     }
                 }
             }
+            rentingCompanies.remove(companyNumber);
         }
 
         processability = "\nTotal disk capacity: "+totalDiskCapacity+"tb"+
@@ -381,15 +382,13 @@ public class DataCenter {
                             totalDiskCapacity += miniRooms[i][j].getTotalDiskCapacity();
                             totalRamMemory += miniRooms[i][j].getTotalRamMemory();
                             miniRooms[i][j].leaveMiniRoom();
-
-                            if(amountOfRents(companyNumber, 1)<1){
-                                rentingCompanies.remove(companyNumber);
-                            }
-
                             canceled = true;
                         }
                     }
                 }
+            }
+            if(amountOfRents(companyNumber, 1)<1){
+                rentingCompanies.remove(companyNumber);
             }
         }
         else{
@@ -400,15 +399,13 @@ public class DataCenter {
                             totalDiskCapacity += miniRooms[i][j].getTotalDiskCapacity();
                             totalRamMemory += miniRooms[i][j].getTotalRamMemory();
                             miniRooms[i][j].leaveMiniRoom();
-
-                            if(amountOfRents(companyNumber, 0)<1){
-                                rentingCompanies.remove(companyNumber);
-                            }
-
                             canceled = true;
                         }
                     }
                 }
+            }
+            if(amountOfRents(companyNumber, 0)<1){
+                rentingCompanies.remove(companyNumber);
             }
         }
 
